@@ -960,13 +960,13 @@ async function verifySolanaTokenPayment(params: {
   const connection = new Connection(params.cfg.rpcUrl, "confirmed");
   let tx = await connection.getParsedTransaction(params.txHash, {
     commitment: "confirmed",
-    maxSupportedTransactionVersion: 0,
+    maxSupportedTransactionVersion: 1,
   });
   for (let attempt = 0; !tx && attempt < 12; attempt++) {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     tx = await connection.getParsedTransaction(params.txHash, {
       commitment: "confirmed",
-      maxSupportedTransactionVersion: 0,
+      maxSupportedTransactionVersion: 1,
     });
   }
   if (!tx) {
